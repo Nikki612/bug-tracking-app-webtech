@@ -1,33 +1,33 @@
 import { DataTypes} from "sequelize";
 import {sequelize} from "../sequelize.js";
 
-const User=sequelize.define(
-    "User",
+const Bug=sequelize.define(
+    "Bug",
     {
-        id:
+        bugId:
         {
             type:DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        email:
-        {
-            type:DataTypes.STRING,
-            allowNull: false,
-            unique: true,
-            isEmail:true
-        },
-        password:
+        severity:
         {
             type:DataTypes.STRING,
             allowNull: false
         },
-        role:
+        description:
         {
             type:DataTypes.STRING,
-            allowNull: true
+            allowNull: false
+        },
+        link:
+        {
+            type:DataTypes.STRING,
+            allowNull: false,
+            isUrl: true
+            
         }
     }
 )
 
-export {User};
+export {Bug};

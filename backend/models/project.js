@@ -1,33 +1,32 @@
 import { DataTypes} from "sequelize";
 import {sequelize} from "../sequelize.js";
 
-const User=sequelize.define(
-    "User",
+const Project=sequelize.define(
+    "Project",
     {
-        id:
+        projectId:
         {
             type:DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        email:
+        name:
         {
             type:DataTypes.STRING,
             allowNull: false,
-            unique: true,
-            isEmail:true
         },
-        password:
+        descrption:
         {
             type:DataTypes.STRING,
             allowNull: false
         },
-        role:
+        repository:
         {
             type:DataTypes.STRING,
-            allowNull: true
+            allowNull: false,
+            isUrl: true
         }
     }
 )
 
-export {User};
+export {Project};
