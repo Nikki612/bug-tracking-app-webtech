@@ -3,7 +3,7 @@ import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import Modal from '@mui/material/Modal'
-import Alert from '@mui/material/Alert'
+import { Input } from '@mui/material'
 
 const style = {
   position: 'absolute',
@@ -33,14 +33,39 @@ export default function BasicModal() {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
+            Add a Project
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <Alert severity="error">
-              This is an error alert — check it out!
-            </Alert>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
+          <form id="modal-modal-description" sx={{ mt: 2 }}
+            onSubmit={(event) => {
+              event.preventDefault();
+            }}
+          >
+            <Typography sx={{ mt: 2 }}>
+            Name of  the project:
+            </Typography>
+            <Input
+              placeholder="name"
+              required
+              sx={{ mb: 1, fontSize: 'var(--joy-fontSize-sm)' }}
+            />
+            <Typography sx={{ mt: 2 }}>
+            Description:
+            </Typography>
+            <Input
+              placeholder="zi ba ce face"
+              required
+              sx={{ mb: 1, fontSize: 'var(--joy-fontSize-sm)' }}
+            />
+            <Typography sx={{ mt: 2 }}>
+            Repository:
+            </Typography>
+            <Input
+              placeholder="da linku"
+              required
+              sx={{ mb: 1, fontSize: 'var(--joy-fontSize-sm)' }}
+            />
+          </form>
+          <Button onClick={handleClose} type="submit">Submit</Button>
         </Box>
       </Modal>
     </div>
