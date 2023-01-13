@@ -1,50 +1,127 @@
 import * as React from 'react'
-import { DataGrid } from '@mui/x-data-grid'
-import Stack from '@mui/material/Stack'
-import Button from '@mui/material/Button'
+import Paper from '@mui/material/Paper'
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableContainer from '@mui/material/TableContainer'
+import TableHead from '@mui/material/TableHead'
+import TablePagination from '@mui/material/TablePagination'
+import TableRow from '@mui/material/TableRow'
+import Alert from '@mui/material/Alert'
+import Modal from './Modal'
 
 const columns = [
-  { field: 'id', headerName: 'ID', width: 130 },
-  {
-    field: 'name',
-    headerName: 'NAME',
-    width: 130,
-    valueGetter: (params) => `${params.row.firstName} `,
-  },
+  { id: 'name', label: 'Project Name', minWidth: 170 },
 
   {
-    field: 'number of bugs',
-    headerName: 'Number of bugs',
-    description: 'This column has a value getter and is not sortable.',
-    sortable: false,
-    width: 130,
-    valueGetter: (params) => `${params.row.age}`,
+    id: 'team',
+    label: 'Team',
+    minWidth: 170,
+    align: 'left',
+    format: (value) => value.toLocaleString('en-US'),
+  },
+  {
+    id: 'no_bugs',
+    label: 'Number of Bugs',
+    minWidth: 170,
+    align: 'left',
+    format: (value) => value.toLocaleString('en-US'),
+  },
+  {
+    id: 'button',
+    label: 'morena',
+    minWidth: 170,
+    align: 'right',
+    format: (value) => value.toLocaleString('en-US'),
   },
 ]
+
+function createData(name, team, no_bugs) {
+  return { name, team, no_bugs }
+}
 
 const rows = [
-  { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-  { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-  { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-  { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-  { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-  { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-  { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-  { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-  { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
+  createData('India', 'IN', 1324171354),
+  createData('India', 'IN', 1324171354),
+  createData('India', 'IN', 1324171354),
+  createData('India', 'IN', 1324171354),
+  createData('India', 'IN', 1324171354),
+  createData('India', 'IN', 1324171354),
 ]
 
-export default function DataTable() {
+export default function StickyHeadTable() {
+  const [alert, setAlert] = React.useState(false)
+  const [page, setPage] = React.useState(0)
+  const [rowsPerPage, setRowsPerPage] = React.useState(10)
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage)
+  }
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value)
+    setPage(0)
+  }
+
   return (
-    <div style={{ height: 400, width: '100%' }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
-        checkboxSelection
+    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+      <TableContainer sx={{ maxHeight: 440 }}>
+        <Table stickyHeader aria-label="sticky table">
+          <TableHead>
+            <TableRow>
+              {columns.map((column) => (
+                <TableCell
+                  key={column.id}
+                  align={column.align}
+                  style={{ minWidth: column.minWidth }}
+                >
+                  {column.label}
+                </TableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((row) => {
+                return (
+                  <>
+                    <TableRow
+                      hover
+                      role="checkbox"
+                      tabIndex={-1}
+                      key={row.code}
+                    >
+                      {columns.map((column) => {
+                        const value = row[column.id]
+                        return (
+                          <TableCell key={column.id} align={column.align}>
+                            {column.format && typeof value === 'number'
+                              ? column.format(value)
+                              : value}
+                          </TableCell>
+                        )
+                      })}
+                      <TableCell>
+                        <Modal />
+                      </TableCell>
+                    </TableRow>
+                  </>
+                )
+              })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[10, 25, 100]}
+        component="div"
+        count={rows.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
       />
-      <Button variant="contained">Add project</Button>
-    </div>
+      <Modal />
+    </Paper>
   )
 }
