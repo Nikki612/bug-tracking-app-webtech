@@ -16,6 +16,11 @@ const ProjectMember=sequelize.define(
             type:DataTypes.STRING,
             primaryKey: true,
             allowNull: false,
+        },
+        memberType:
+        {
+            type:DataTypes.STRING,
+            allowNull: false
         }
     }
 )

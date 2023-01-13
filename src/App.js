@@ -2,6 +2,7 @@ import Header from './components/Header'
 import Content from './components/Content'
 import { BrowserRouter, Route, Router, Switch } from 'react-router-dom'
 import LoginScreen from './screens/LoginScreen'
+import SignUpScreen from './screens/SignUpScreen'
 import './App.css'
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={LoginScreen} />
             <Route path="/home" component={Content} />
+            <Route path="/register" component={SignUpScreen} />
           </Switch>
         </div>
       </BrowserRouter>

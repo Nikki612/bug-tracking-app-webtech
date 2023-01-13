@@ -51,7 +51,7 @@ export default function App() {
             <NavLink to="/home"> Log in</NavLink>
           </Button>
           <Typography
-            endDecorator={<Link href="/sign-up">Sign up</Link>}
+            endDecorator={<Link href="/sign-up"><NavLink to="/register"> Sign Up</NavLink></Link>}
             fontSize="sm"
             sx={{ alignSelf: 'center' }}
           >

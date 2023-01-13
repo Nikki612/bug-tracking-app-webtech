@@ -5,6 +5,7 @@ import Typography from '@mui/joy/Typography'
 import TextField from '@mui/joy/TextField'
 import Button from '@mui/joy/Button'
 import Link from '@mui/joy/Link'
+import { NavLink } from 'react-router-dom'
 
 export default function App() {
   return (
@@ -45,7 +46,7 @@ export default function App() {
             placeholder="password"
             label="Password"
           />
-          <Button sx={{ mt: 1 /* margin top */ }}>Sign up</Button>
+          <Button sx={{ mt: 1 /* margin top */ }}><NavLink to="/"> Sign Up</NavLink></Button>
         </Sheet>
       </main>
     </CssVarsProvider>
