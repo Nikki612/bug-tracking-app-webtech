@@ -13,7 +13,7 @@ import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
 import AdbIcon from '@mui/icons-material/Adb'
 
-const pages = ['Your Projects', 'ACCOUNT']
+const pages = ['All Projects', 'My Projects', 'Testing Projects']
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
 
 function ResponsiveAppBar() {
@@ -22,6 +22,7 @@ function ResponsiveAppBar() {
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget)
+    
   }
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget)

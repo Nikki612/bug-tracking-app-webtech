@@ -14,6 +14,9 @@ function App() {
             <Route exact path="/" component={LoginScreen} />
             <Route path="/home" component={Content} />
             <Route path="/register" component={SignUpScreen} />
+            <Route path="/myprojects" component={SignUpScreen} />
+            <Route path="/allprojects" component={SignUpScreen} />
+            <Route path="/testingprojects" component={SignUpScreen} />
           </Switch>
         </div>
       </BrowserRouter>
