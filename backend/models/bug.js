@@ -26,6 +26,11 @@ const Bug=sequelize.define(
             allowNull: false,
             isUrl: true
             
+        },
+        status:
+        {
+            type:DataTypes.STRING,
+            allowNull: false
         }
     }
 )

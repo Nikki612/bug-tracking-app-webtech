@@ -28,7 +28,7 @@ const getAllUsersFromDB=async (req,res)=>{
     }
 }
 
-const getUserFromDBById=async (req,res)=>{
+/*const getUserFromDBById=async (req,res)=>{
     try{
         const user=await User.findByPk(req.params.id);
         if(user)
@@ -43,11 +43,11 @@ const getUserFromDBById=async (req,res)=>{
     catch(err){
         res.status(500).json(err);
     }
-};
+}; */
 
 export
 {
     insertUserIntoDatabase,
-    getAllUsersFromDB,
-    getUserFromDBById
+    getAllUsersFromDB
+    //getUserFromDBById
 };
