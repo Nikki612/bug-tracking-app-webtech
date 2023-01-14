@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useState, useEffect } from 'react'
 import Paper from '@mui/material/Paper'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
@@ -9,10 +9,11 @@ import TablePagination from '@mui/material/TablePagination'
 import TableRow from '@mui/material/TableRow'
 import Alert from '@mui/material/Alert'
 import Modal from './Modal'
-import {NavLink} from "react-router-dom";
+import { NavLink } from 'react-router-dom'
+import axios from 'axios'
 
 const columns = [
-  { id: 'name', label: 'Project Name', minWidth: 170, },
+  { id: 'name', label: 'Project Name', minWidth: 170 },
 
   {
     id: 'team',
@@ -51,10 +52,26 @@ const rows = [
 ]
 
 export default function StickyHeadTable() {
+  const [projects, setProjects] = useState('')
+  const [projectId, setProjectId] = useState('')
+  const [projectName, setProjectName] = useState('')
+  const [description, setDescription] = useState('')
+  const [repository, setRepository] = useState('')
+
   const [alert, setAlert] = React.useState(false)
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
 
+  useEffect(() => {
+    axios
+      .get('http://localhost:5001/api/projects')
+      .then((response) => {
+        setProjects(response.data)
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+  }, [])
   const handleChangePage = (event, newPage) => {
     setPage(newPage)
   }
@@ -65,7 +82,6 @@ export default function StickyHeadTable() {
   }
 
   return (
-    
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
@@ -83,7 +99,7 @@ export default function StickyHeadTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows
+            {projects
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
