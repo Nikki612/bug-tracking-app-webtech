@@ -1,5 +1,6 @@
 import { User } from "../models/user.js";
 import {Op} from "sequelize"
+import { Project } from "../models/project.js";
 
 // INSERT INTO METHOD
 const insertUserIntoDatabase=async (req,res)=>{
@@ -80,11 +81,57 @@ const deleteUser = async (req, res) => {
     }
   };
 
+// GET PROJECTS BY USER ID
+const getProjectsByUserID = async (req, res, next) => {
+    try {
+      const userId = req.params.id;
+      const projects = await Project.findAll({
+        where: { userId },
+        include: [
+          {
+            model: Project,
+            as: 'project',
+          },
+        ],
+      });
+      if (projects.length === 0)
+        res.status(404).json({ message: 'No projects found.' });
+      else res.status(200).json({ data: projects });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+// GET PROJECTS WHERE THE USER IS TESTER
+const getProjectsTester = async (req, res, next) => {
+    try {
+      const userId = req.params.id;
+      const userRole = req.params.role==='tester';
+      const projects = await Project.findAll({
+        where: { userId },
+        where: { userRole },
+        include: [
+          {
+            model: Project,
+            as: 'project',
+          },
+        ],
+      });
+      if (projects.length === 0)
+        res.status(404).json({ message: 'No projects found.' });
+      else res.status(200).json({ data: projects });
+    } catch (error) {
+      next(error);
+    }
+  };
+
 export
 {
     insertUserIntoDatabase,
     getAllUsersFromDB,
     getUserFromDBById,
     updateUSerFromDBById,
-    deleteUser
+    deleteUser,
+    getProjectsByUserID,
+    getProjectsTester
 };
