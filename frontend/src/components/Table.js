@@ -52,7 +52,7 @@ const rows = [
 ]
 
 export default function StickyHeadTable() {
-  const [projects, setProjects] = useState('')
+  const [projects, setProjects] = useState([])
   const [projectId, setProjectId] = useState('')
   const [projectName, setProjectName] = useState('')
   const [description, setDescription] = useState('')
