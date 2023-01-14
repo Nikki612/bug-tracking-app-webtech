@@ -9,13 +9,6 @@ import Paper from "@mui/material/Paper";
 
 import axios from "axios";
 
-function createData(id,name,desription , repository) {
-  return {id,name,desription , repository };
-}
-
-const rows = [];
-let id_Show=0;
-
 export default function DynamicTable() {
   const [data, setData] = useState([]);
 
