@@ -4,15 +4,17 @@ import { Project } from "../models/project.js";
 
 // INSERT INTO METHOD
 const insertUserIntoDatabase=async (req,res)=>{
-
-    try{
-        const receivedUser=req.body;
-        await User.create(receivedUser);
-        res.status(200).json("Object has been added to DB!"); //for success 
-    }
-    catch(err){
-        return res.status(500).json(err) //for client error
-    }
+    try {
+      const user = await User.create({
+          id:req.body.id,
+          email: req.body.email,
+          password: req.body.password,
+          role: req.body.role
+      });
+      res.status(201).json({data: user});
+  } catch(err) {
+      res.status(500).json(err) 
+  }
 }
 
 // GET ALL

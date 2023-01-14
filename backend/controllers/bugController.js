@@ -3,15 +3,18 @@ import {Op} from "sequelize"
 
 //INSERT INTO METHOD
 const insertBugIntoDatabase=async (req,res)=>{
-
-    try{
-        const receivedBug=req.body;
-        await Bug.create(receivedBug);
-        res.status(200).json("Object has been added to DB!"); //for success 
-    }
-    catch(err){
-        return res.status(500).json(err) //for client error
-    }
+        try {
+            const bug = await Bug.create({
+                bugId:req.body.bugId,
+                severity: req.body.severity,
+                description: req.body.description,
+                link: req.body.link,
+                status: req.body.status
+            });
+            res.status(201).json({data: bug});
+        } catch(err) {
+            res.status(500).json(err) 
+        }
 }
 
 // GET ALL
@@ -20,7 +23,6 @@ const getAllBugsFromDB=async (req,res)=>{
     try{
         const bugs=await Bug.findAll();
         return res.status(200).json(bugs);
-
     }
     catch(err)
     {

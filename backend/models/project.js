@@ -15,7 +15,7 @@ const Project=sequelize.define(
             type:DataTypes.STRING,
             allowNull: false,
         },
-        descrption:
+        description:
         {
             type:DataTypes.STRING,
             allowNull: false

@@ -3,15 +3,17 @@ import {Op} from "sequelize"
 
 //INSERT INTO METHOD
 const insertProjectIntoDatabase=async (req,res)=>{
-
-    try{
-        const receivedProject=req.body;
-        await Project.create(receivedProject);
-        res.status(200).json("Object has been added to DB!"); //for success 
-    }
-    catch(err){
-        return res.status(500).json(err) //for client error
-    }
+        try {
+            const project = await Project.create({
+                projectId:req.body.projectId,
+                name: req.body.name,
+                description: req.body.description,
+                repository: req.body.repository
+            });
+            res.status(201).json({data: project});
+        } catch(err) {
+            res.status(500).json(err) 
+        }
 }
 
 // GET ALL

@@ -8,6 +8,8 @@ import { Bug } from "./models/bug.js";
 import { Project } from "./models/project.js";
 import { ProjectMember } from "./models/projectmember.js";
 import { BugRouter } from "./routers/bugRouter.js";
+import { ProjectRouter } from "./routers/projectRouter.js";
+import { ProjectMemberRouter } from "./routers/projectMemberRouter.js";
 
 const port = 5001;
 const app = express();
@@ -16,6 +18,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/api", UserRouter);
 app.use("/api", BugRouter);
+app.use("/api", ProjectRouter);
+app.use("/api", ProjectMemberRouter);
+
 app.listen(port, async () => {
   try {
     sequelize.authenticate();
