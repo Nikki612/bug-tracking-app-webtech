@@ -14,7 +14,7 @@ import MenuItem from '@mui/material/MenuItem'
 import AdbIcon from '@mui/icons-material/Adb'
 import { NavLink } from 'react-router-dom'
 
-const pages = ['All Projects', 'My Projects', 'Testing Projects']
+const pages = ['All_Projects', 'My_Projects', 'Testing_Projects']
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
 
 function ResponsiveAppBar() {
@@ -91,7 +91,7 @@ function ResponsiveAppBar() {
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
-                    <NavLink to="/project">{page}</NavLink>
+                    <NavLink to={`/${page}`}>{page}</NavLink>
                   </Typography>
                 </MenuItem>
               ))}
@@ -124,7 +124,7 @@ function ResponsiveAppBar() {
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 <NavLink
-                  to="/project"
+                  to={`/${page}`}
                   style={{ textDecoration: 'none', color: 'white' }}
                 >
                   {page}

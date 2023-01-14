@@ -16,10 +16,10 @@ function App() {
             <Route exact path="/" component={LoginScreen} />
             <Route path="/home" component={Content} />
             <Route path="/register" component={SignUpScreen} />
-            <Route path="/allprojects" component={SignUpScreen} />
+            <Route path="/All_Projects" component={Content} />
             <Route path="/testingprojects" component={SignUpScreen} />
             <Route path="/project" component={ProjectSpecsScreen} />
-            <Route path="/myprojects" component={MyProjectsScreen} />
+            <Route path="/My_Projects" component={MyProjectsScreen} />
           </Switch>
         </div>
       </BrowserRouter>
