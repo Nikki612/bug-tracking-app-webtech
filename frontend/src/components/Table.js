@@ -98,7 +98,7 @@ export default function StickyHeadTable() {
               ))}
             </TableRow>
           </TableHead>
-          <TableBody>
+          {/* <TableBody>
             {projects
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
@@ -127,7 +127,7 @@ export default function StickyHeadTable() {
                   </>
                 )
               })}
-          </TableBody>
+          </TableBody> */}
         </Table>
       </TableContainer>
       <TablePagination
