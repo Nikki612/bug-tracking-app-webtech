@@ -17,8 +17,8 @@ function createData(id, name, description, repo) {
   return {
     id,
     name,
-    description,
     repo,
+    description,
     history: [
       {
         id: 1,
@@ -56,8 +56,8 @@ function Row(props) {
           {row.id}
         </TableCell>
         <TableCell align="right">{row.name}</TableCell>
-        <TableCell align="right">{row.description}</TableCell>
         <TableCell align="right">{row.repo}</TableCell>
+        <TableCell align="right">{row.description}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -115,8 +115,8 @@ export default function CollapsibleTable() {
             <TableCell />
             <TableCell> No</TableCell>
             <TableCell align="right">Name</TableCell>
-            <TableCell align="right">Description</TableCell>
             <TableCell align="right">Repo</TableCell>
+            <TableCell align="right">Description</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
