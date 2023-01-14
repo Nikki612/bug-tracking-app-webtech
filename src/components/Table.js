@@ -9,9 +9,10 @@ import TablePagination from '@mui/material/TablePagination'
 import TableRow from '@mui/material/TableRow'
 import Alert from '@mui/material/Alert'
 import Modal from './Modal'
+import {NavLink} from "react-router-dom";
 
 const columns = [
-  { id: 'name', label: 'Project Name', minWidth: 170 },
+  { id: 'name', label: 'Project Name', minWidth: 170, },
 
   {
     id: 'team',
@@ -64,6 +65,7 @@ export default function StickyHeadTable() {
   }
 
   return (
+    
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">

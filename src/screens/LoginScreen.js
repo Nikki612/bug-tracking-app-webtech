@@ -47,9 +47,10 @@ export default function App() {
             placeholder="password"
             label="Password"
           />
+           <NavLink to="/home">
           <Button sx={{ mt: 1 /* margin top */ }}>
-            <NavLink to="/home"> Log in</NavLink>
-          </Button>
+            Log in
+          </Button></NavLink>
           <Typography
             endDecorator={<Link href="/sign-up"><NavLink to="/register"> Sign Up</NavLink></Link>}
             fontSize="sm"
