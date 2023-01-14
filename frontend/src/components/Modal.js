@@ -68,7 +68,7 @@ export default function BasicModal() {
             Team:
             </Typography>
             <Input
-              placeholder="write the e-mails of the team-members separateed by ,"
+              placeholder="write the e-mails of the team-members separated by ,"
               required
               sx={{ mb: 1, fontSize: 'var(--joy-fontSize-sm)' }}
             />
