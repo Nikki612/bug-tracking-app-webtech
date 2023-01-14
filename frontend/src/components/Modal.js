@@ -64,6 +64,14 @@ export default function BasicModal() {
               required
               sx={{ mb: 1, fontSize: 'var(--joy-fontSize-sm)' }}
             />
+            <Typography sx={{ mt: 2 }}>
+            Team:
+            </Typography>
+            <Input
+              placeholder="write the e-mails of the team-members separateed by ,"
+              required
+              sx={{ mb: 1, fontSize: 'var(--joy-fontSize-sm)' }}
+            />
           </form>
           <Button onClick={handleClose} type="submit">Submit</Button>
         </Box>
