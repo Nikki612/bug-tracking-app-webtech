@@ -14,7 +14,7 @@ function App() {
         <Route path="/home" element={<AllProjectsScreen />} />
         <Route path="/register" element={<SignUpScreen />} />
         <Route path="/All_Projects" element={<AllProjectsScreen />} />
-        <Route path="/testingprojects" element={<SignUpScreen />} />
+        {/* <Route path="/testingprojects" element={<SignUpScreen />} /> */}
         <Route path="/project" element={<ProjectSpecsScreen />} />
         <Route path="/My_Projects" element={<MyProjectsScreen />} />
       </Routes>
