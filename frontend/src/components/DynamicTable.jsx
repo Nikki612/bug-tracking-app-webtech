@@ -39,7 +39,7 @@ export default function DynamicTable() {
           {data.map((row) => (
             <TableRow key={row.id}>
               <TableCell component="th" scope="row">
-                {row.id}
+                {row.projectId}
               </TableCell>
               <TableCell align="right">{row.name}</TableCell>
               <TableCell align="right">{row.description}</TableCell>
