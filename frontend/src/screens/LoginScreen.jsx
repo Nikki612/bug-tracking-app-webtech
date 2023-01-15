@@ -51,11 +51,7 @@ function LoginScreen() {
             <Button sx={{ mt: 1 /* margin top */ }}>Log in</Button>
           </NavLink>
           <Typography
-            endDecorator={
-              <Link href="/sign-up">
-                <NavLink to="/register"> Sign Up</NavLink>
-              </Link>
-            }
+            endDecorator={<NavLink to="/register"> Sign Up</NavLink>}
             fontSize="sm"
             sx={{ alignSelf: 'center' }}
           >
