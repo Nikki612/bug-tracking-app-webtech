@@ -7,7 +7,6 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TablePagination from '@mui/material/TablePagination'
 import TableRow from '@mui/material/TableRow'
-import Alert from '@mui/material/Alert'
 import Modal from './Modal'
 import { NavLink } from 'react-router-dom'
 import axios from 'axios'
@@ -98,7 +97,7 @@ export default function StickyHeadTable() {
               ))}
             </TableRow>
           </TableHead>
-          <TableBody>
+          {/* <TableBody>
             {projects
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
@@ -127,7 +126,7 @@ export default function StickyHeadTable() {
                   </>
                 )
               })}
-          </TableBody>
+          </TableBody> */}
         </Table>
       </TableContainer>
       <TablePagination
