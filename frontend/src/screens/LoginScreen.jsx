@@ -1,14 +1,36 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { CssVarsProvider, useColorScheme } from '@mui/joy/styles';
 import Sheet from '@mui/joy/Sheet';
 import Typography from '@mui/joy/Typography';
 import TextField from '@mui/joy/TextField';
 import Button from '@mui/joy/Button';
-import Link from '@mui/joy/Link';
-
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function LoginScreen() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+
+  function handleClick(event) {
+    event.preventDefault();
+    return axios
+      .post('http://localhost:5001/api/login', {
+        email: email,
+        password: password,
+      })
+      .then((response) => {
+        if (response.data.data.id) {
+          navigate('/home');
+        } else {
+          alert('Incorrect username or password');
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
   return (
     <CssVarsProvider>
       <main>
@@ -34,22 +56,23 @@ function LoginScreen() {
             <Typography level="body2">Sign in to continue.</Typography>
           </div>
           <TextField
-            // html input attribute
             name="email"
             type="email"
             placeholder="johndoe@email.com"
             // pass down to FormLabel as children
             label="Email"
+            onChange={(event) => setEmail(event.target.value)}
           />
           <TextField
             name="password"
             type="password"
             placeholder="password"
             label="Password"
+            onChange={(event) => setPassword(event.target.value)}
           />
-          <NavLink to="/home">
-            <Button sx={{ mt: 1 /* margin top */ }}>Log in</Button>
-          </NavLink>
+          <Button onClick={handleClick}>
+            <span>Log in</span>
+          </Button>
           <Typography
             endDecorator={<NavLink to="/register"> Sign Up</NavLink>}
             fontSize="sm"
