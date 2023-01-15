@@ -6,6 +6,7 @@ import ProjectSpecsScreen from './screens/ProjectSpecsScreen';
 import MyProjectsScreen from './screens/MyProjectsScreen';
 import SignUpScreen from './screens/SignUpScreen';
 import AddProjectScreen from './screens/AddProjectScreen';
+import TesterProjects from './screens/TesterProjects';
 
 function App() {
   return (
@@ -15,8 +16,7 @@ function App() {
         <Route path="/home" element={<AllProjectsScreen />} />
         <Route path="/register" element={<SignUpScreen />} />
         <Route path="/All_Projects" element={<AllProjectsScreen />} />
-        {/* <Route path="/testingprojects" element={<SignUpScreen />} /> */}
-        <Route path="/project" element={<ProjectSpecsScreen />} />
+        <Route path="/Testing_Projects" element={<TesterProjects />} /> 
         <Route path="/My_Projects" element={<MyProjectsScreen />} />
         <Route path="/addProject" element={<AddProjectScreen/>} />
       </Routes>

@@ -6,15 +6,13 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import ToggleButton from '@mui/material/ToggleButton';
-import CheckIcon from '@mui/icons-material/Check';
+import Button from "@mui/joy/Button";
+import BasicModal from "./BasicModal";
 
 import axios from "axios";
 
-export default function DynamicTable() {
+export default function DynamicTableBugs() {
   const [data, setData] = useState([]);
-  const [selected, setSelected] = useState(false);
-  const [selectedIndexes, setSelectedIndexes] = useState([]);
 
   useEffect(() => {
     axios
@@ -37,34 +35,17 @@ export default function DynamicTable() {
             <TableCell align="right">Name</TableCell>
             <TableCell align="right">Description</TableCell>
             <TableCell align="right">Repository</TableCell>
-            <TableCell align="right">Tester?</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {data.map((row) => (
-            <TableRow key={row.id} onClick={() => setSelectedIndex(row.projectId)}>
+            <TableRow key={row.id}>
               <TableCell component="th" scope="row">
                 {row.projectId}
               </TableCell>
               <TableCell align="right">{row.name}</TableCell>
               <TableCell align="right">{row.description}</TableCell>
-              <TableCell align="right">{row.repository}</TableCell>
-              <TableCell align="right">
-                <ToggleButton
-                  key={row.projectId}
-                  value="check"
-                  selected={selectedIndexes.includes(row.projectId)}
-                  onChange={() => {
-                    if (selectedIndexes.includes(row.projectId)) {
-                    setSelectedIndexes(selectedIndexes.filter(id => id !== row.projectId));
-                } else {
-                    setSelectedIndexes([...selectedIndexes, row.projectId]);
-                }
-                 }}
-                >
-                  <CheckIcon />
-                </ToggleButton>
-              </TableCell>
+              <TableCell align="right"><BasicModal>Add a Bug</BasicModal></TableCell>
             </TableRow>
           ))}
         </TableBody>

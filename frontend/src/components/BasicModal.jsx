@@ -25,7 +25,7 @@ function BasicModal() {
   return (
     <>
       <div>
-        <Button onClick={handleOpen}>Add Project</Button>
+        <Button onClick={handleOpen}>Add a Bug</Button>
         <Modal
           open={open}
           onClose={handleClose}
@@ -34,7 +34,7 @@ function BasicModal() {
         >
           <Box sx={style}>
             <Typography id="modal-modal-title" variant="h6" component="h2">
-              Add a Project
+              Add a Bug
             </Typography>
             <form
               id="modal-modal-description"
@@ -43,9 +43,9 @@ function BasicModal() {
                 event.preventDefault();
               }}
             >
-              <Typography sx={{ mt: 2 }}>Name of the project:</Typography>
+              <Typography sx={{ mt: 2 }}>Severity:</Typography>
               <Input
-                placeholder="name"
+                placeholder="high,mild or low"
                 required
                 sx={{ mb: 1, fontSize: 'var(--joy-fontSize-sm)' }}
               />
@@ -55,15 +55,9 @@ function BasicModal() {
                 required
                 sx={{ mb: 1, fontSize: 'var(--joy-fontSize-sm)' }}
               />
-              <Typography sx={{ mt: 2 }}>Repository:</Typography>
+              <Typography sx={{ mt: 2 }}>Link:</Typography>
               <Input
                 placeholder="da linku"
-                required
-                sx={{ mb: 1, fontSize: 'var(--joy-fontSize-sm)' }}
-              />
-              <Typography sx={{ mt: 2 }}>Team:</Typography>
-              <Input
-                placeholder="write the e-mails of the team-members separated by ,"
                 required
                 sx={{ mb: 1, fontSize: 'var(--joy-fontSize-sm)' }}
               />
