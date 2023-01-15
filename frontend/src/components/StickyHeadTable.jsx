@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react'
-import Paper from '@mui/material/Paper'
-import Table from '@mui/material/Table'
-import TableBody from '@mui/material/TableBody'
-import TableCell from '@mui/material/TableCell'
-import TableContainer from '@mui/material/TableContainer'
-import TableHead from '@mui/material/TableHead'
-import TablePagination from '@mui/material/TablePagination'
-import TableRow from '@mui/material/TableRow'
-import Modal from './Modal'
-import { NavLink } from 'react-router-dom'
-import axios from 'axios'
+import React, { useState, useEffect } from 'react';
+import Paper from '@mui/material/Paper';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TablePagination from '@mui/material/TablePagination';
+import TableRow from '@mui/material/TableRow';
+import Modal from './BasicModal';
+import { NavLink } from 'react-router-dom';
+import axios from 'axios';
 
 const columns = [
   { id: 'name', label: 'Project Name', minWidth: 170 },
@@ -35,10 +35,10 @@ const columns = [
     align: 'right',
     format: (value) => value.toLocaleString('en-US'),
   },
-]
+];
 
 function createData(name, team, no_bugs) {
-  return { name, team, no_bugs }
+  return { name, team, no_bugs };
 }
 
 const rows = [
@@ -48,37 +48,37 @@ const rows = [
   createData('India', 'IN', 1324171354),
   createData('India', 'IN', 1324171354),
   createData('India', 'IN', 1324171354),
-]
+];
 
-export default function StickyHeadTable() {
-  const [projects, setProjects] = useState([])
-  const [projectId, setProjectId] = useState('')
-  const [projectName, setProjectName] = useState('')
-  const [description, setDescription] = useState('')
-  const [repository, setRepository] = useState('')
+function StickyHeadTable() {
+  const [projects, setProjects] = useState([]);
+  const [projectId, setProjectId] = useState('');
+  const [projectName, setProjectName] = useState('');
+  const [description, setDescription] = useState('');
+  const [repository, setRepository] = useState('');
 
-  const [alert, setAlert] = React.useState(false)
-  const [page, setPage] = React.useState(0)
-  const [rowsPerPage, setRowsPerPage] = React.useState(10)
+  const [alert, setAlert] = React.useState(false);
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   useEffect(() => {
     axios
       .get('http://localhost:5001/api/projects')
       .then((response) => {
-        setProjects(response.data)
+        setProjects(response.data);
       })
       .catch((error) => {
-        console.error(error)
-      })
-  }, [])
+        console.error(error);
+      });
+  }, []);
   const handleChangePage = (event, newPage) => {
-    setPage(newPage)
-  }
+    setPage(newPage);
+  };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value)
-    setPage(0)
-  }
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
@@ -140,5 +140,7 @@ export default function StickyHeadTable() {
       />
       <Modal />
     </Paper>
-  )
+  );
 }
+
+export default StickyHeadTable;

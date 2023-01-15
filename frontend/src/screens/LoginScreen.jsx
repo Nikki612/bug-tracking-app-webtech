@@ -1,14 +1,14 @@
-import * as React from 'react'
-import { CssVarsProvider, useColorScheme } from '@mui/joy/styles'
-import Sheet from '@mui/joy/Sheet'
-import Typography from '@mui/joy/Typography'
-import TextField from '@mui/joy/TextField'
-import Button from '@mui/joy/Button'
-import Link from '@mui/joy/Link'
+import * as React from 'react';
+import { CssVarsProvider, useColorScheme } from '@mui/joy/styles';
+import Sheet from '@mui/joy/Sheet';
+import Typography from '@mui/joy/Typography';
+import TextField from '@mui/joy/TextField';
+import Button from '@mui/joy/Button';
+import Link from '@mui/joy/Link';
 
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
 
-export default function App() {
+function LoginScreen() {
   return (
     <CssVarsProvider>
       <main>
@@ -47,12 +47,15 @@ export default function App() {
             placeholder="password"
             label="Password"
           />
-           <NavLink to="/home">
-          <Button sx={{ mt: 1 /* margin top */ }}>
-            Log in
-          </Button></NavLink>
+          <NavLink to="/home">
+            <Button sx={{ mt: 1 /* margin top */ }}>Log in</Button>
+          </NavLink>
           <Typography
-            endDecorator={<Link href="/sign-up"><NavLink to="/register"> Sign Up</NavLink></Link>}
+            endDecorator={
+              <Link href="/sign-up">
+                <NavLink to="/register"> Sign Up</NavLink>
+              </Link>
+            }
             fontSize="sm"
             sx={{ alignSelf: 'center' }}
           >
@@ -61,5 +64,7 @@ export default function App() {
         </Sheet>
       </main>
     </CssVarsProvider>
-  )
+  );
 }
+
+export default LoginScreen;

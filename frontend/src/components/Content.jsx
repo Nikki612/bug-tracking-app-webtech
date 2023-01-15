@@ -1,5 +1,5 @@
 import React from 'react'
-import DataTable from './Table'
+import DataTable from './StickyHeadTable'
 import Header from './Header'
 
 function Content() {

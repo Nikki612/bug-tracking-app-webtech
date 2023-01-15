@@ -1,7 +1,7 @@
-import React from 'react'
-import Appbar from './Appbar'
-const Header = () => {
-  return <Appbar />
+import React from 'react';
+import Appbar from './ResponsiveAppBar';
+function Header() {
+  return <Appbar />;
 }
 
-export default Header
+export default Header;

@@ -1,10 +1,10 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LoginScreen from './screens/LoginScreen';
-import SignUpScreen from './screens/SignUpScreen';
 import './App.css';
+import AllProjectsScreen from './screens/AllProjectsScreen';
 import ProjectSpecsScreen from './screens/ProjectSpecsScreen';
 import MyProjectsScreen from './screens/MyProjectsScreen';
-import AllProjectsScreen from './screens/AllProjectsScreen';
+import SignUpScreen from './screens/SignUpScreen';
 
 function App() {
   return (

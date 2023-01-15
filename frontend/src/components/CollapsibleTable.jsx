@@ -106,7 +106,7 @@ const rows = [
   createData(5,'alibaba', 'ching chong', 'http://link la baieti'),
 ];
 
-export default function CollapsibleTable() {
+function CollapsibleTable() {
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
@@ -128,3 +128,5 @@ export default function CollapsibleTable() {
     </TableContainer>
   );
 }
+
+export default CollapsibleTable;

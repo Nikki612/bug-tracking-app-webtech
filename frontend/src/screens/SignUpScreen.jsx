@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import  React, { useEffect, useState } from 'react'
 import { CssVarsProvider, useColorScheme } from '@mui/joy/styles'
 import Sheet from '@mui/joy/Sheet'
@@ -25,6 +26,18 @@ import axios from 'axios'
           console.error(error);
         });
     }
+=======
+import * as React from 'react';
+import { CssVarsProvider, useColorScheme } from '@mui/joy/styles';
+import Sheet from '@mui/joy/Sheet';
+import Typography from '@mui/joy/Typography';
+import TextField from '@mui/joy/TextField';
+import Button from '@mui/joy/Button';
+import Link from '@mui/joy/Link';
+import { NavLink } from 'react-router-dom';
+
+function SignUpScreen() {
+>>>>>>> Stashed changes
   return (
     <CssVarsProvider>
       <main>
@@ -63,9 +76,17 @@ import axios from 'axios'
             placeholder="password"
             label="Password"
           />
+<<<<<<< Updated upstream
           <Button sx={{ mt: 1 /* margin top */ }} onClick={handleSubmit}> Sign Up</Button>
+=======
+          <Button sx={{ mt: 1 /* margin top */ }}>
+            <NavLink to="/"> Sign Up</NavLink>
+          </Button>
+>>>>>>> Stashed changes
         </Sheet>
       </main>
     </CssVarsProvider>
-  )
+  );
 }
+
+export default SignUpScreen;
