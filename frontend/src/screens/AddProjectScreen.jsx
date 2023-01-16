@@ -1,6 +1,6 @@
 import React, {useEffect,useState} from 'react';
 import Header from '../components/Header';
-import Button from '@mui/joy/Button';
+import Button from '@mui/material/Button';
 import Box from '@mui/joy/Box';
 import Typography from '@mui/joy/Typography';
 import Input from '@mui/joy/Input';
@@ -250,7 +250,7 @@ function AddProjectsScreen() {
       
             />
             </form>
-            <Button type="submit">
+            <Button type="submit" onSubmit={()=>{console.log(this)}}>
               Submit
             </Button>
           </Box>
