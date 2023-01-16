@@ -35,6 +35,7 @@ function AddProjectsScreen() {
   const [users, setCategories] = useState([]);
 
   const [openDialog, toggleOpenDialog] = React.useState(false);
+  
 
   
   const handleClose = () => {
@@ -49,12 +50,23 @@ function AddProjectsScreen() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setCategories({
-      email: dialogValue.email
+    axios.post('http://localhost:5001/api/newProject', {
+        name: event.target.name.value,
+        description: event.target.description.value,
+        repository: event.target.repository.value,
+        team: dialogValue.email
+    })
+    .then(response => {
+        console.log(response);
+    })
+    .catch(error => {
+        console.log(error);
     });
-
+    setCategories({
+        email: dialogValue.email
+    });
     handleClose();
-  };
+};
 
 
   const [dialogValue, setDialogValue] = React.useState({
@@ -113,9 +125,7 @@ function AddProjectsScreen() {
             <form
               id="modal-modal-description"
               sx={{ mt: 2 }}
-              onSubmit={(event) => {
-                event.preventDefault();
-              }}
+              onSubmit={handleSubmit}
             >
               <Typography sx={{ mt: 2 }}>Name of the project:</Typography>
               <Input
