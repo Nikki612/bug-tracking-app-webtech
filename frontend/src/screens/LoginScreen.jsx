@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
-import { CssVarsProvider } from '@mui/joy/styles';
-import Sheet from '@mui/joy/Sheet';
-import Typography from '@mui/joy/Typography';
-import TextField from '@mui/joy/TextField';
-import Button from '@mui/joy/Button';
-import { NavLink, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState } from 'react'
+import { CssVarsProvider } from '@mui/joy/styles'
+import Sheet from '@mui/joy/Sheet'
+import Typography from '@mui/joy/Typography'
+import TextField from '@mui/joy/TextField'
+import Button from '@mui/joy/Button'
+import { NavLink, useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 function LoginScreen() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const navigate = useNavigate();
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const navigate = useNavigate()
 
   function handleClick(event) {
-    event.preventDefault();
+    event.preventDefault()
     return axios
       .post('http://localhost:5001/api/login', {
         email: email,
@@ -21,14 +21,15 @@ function LoginScreen() {
       })
       .then((response) => {
         if (response.data.data.id) {
-          navigate('/home');
+          navigate('/home')
+          localStorage.setItem('userId', response.data.data.id)
         } else {
-          alert('Incorrect username or password');
+          alert('Incorrect username or password')
         }
       })
       .catch((error) => {
-        console.error(error);
-      });
+        console.error(error)
+      })
   }
 
   return (
@@ -83,7 +84,7 @@ function LoginScreen() {
         </Sheet>
       </main>
     </CssVarsProvider>
-  );
+  )
 }
 
-export default LoginScreen;
+export default LoginScreen
