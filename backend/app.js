@@ -32,3 +32,12 @@ app.listen(port, async () => {
 console.log("API is running at port: ", port);
 
 //TODO: TABLE RELATIONSHIPS
+
+User.belongsToMany(Project, {though: ProjectMember});
+Project.belongsToMany(User, {though: ProjectMember});
+Bug.belongsTo(Project)
+Project.hasMany(Bug)
+
+await sequelize.sync({force:true});
+
+
