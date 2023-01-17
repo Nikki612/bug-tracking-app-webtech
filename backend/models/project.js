@@ -18,7 +18,6 @@ const Project = sequelize.define('Project', {
   repository: {
     type: DataTypes.STRING,
     allowNull: false,
-    isUrl: true,
   },
 })
 

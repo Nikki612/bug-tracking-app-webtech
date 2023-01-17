@@ -36,10 +36,10 @@ console.log('API is running at port: ', port)
 User.belongsToMany(Project, { through: ProjectMember })
 Project.belongsToMany(User, { through: ProjectMember })
 
-Bug.belongsTo(Project)
-Project.hasMany(Bug)
+// Bug.belongsTo(Project)
+// Project.hasMany(Bug)
 
 // sequelize.query("DROP TABLE Users_backup").then(() => {
 //   console.log("ProjectMembers table dropped successfully");
 // });
-// await sequelize.sync()
+await sequelize.sync()

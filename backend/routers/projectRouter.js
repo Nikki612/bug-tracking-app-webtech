@@ -12,22 +12,19 @@ router.delete('/projects/:projectId', ProjectController.deleteProject) // delete
 
 router.post('/addNewProject', async (req, res) => {
   try {
-    // extract the data for the project
-    const projectData = {
-      name: req.body.name,
-      description: req.body.description,
-      repository: req.body.repository
-    }
-    // create a new project with the extracted data
-    const project = await Project.create(projectData)
+    // create a new project with the data from the request body
+    const project = await Project.create(req.body)
     // get the users to be added to the project from the request body
     const users = await Promise.all(
       req.body.users.map(async (user) => {
         let foundUser = await User.findOne({ where: { email: user.email } })
+        if (!foundUser) {
+          foundUser = await User.create(user)
+        }
         return foundUser
       })
     )
-    await project.addUsers(users, { through: { memberType: 'member' } })
+    await project.addUsers(users, { through: { memberType: 'pm' } })
     // send a response with the project and the added users
     res.send({ project, users })
   } catch (error) {
@@ -35,7 +32,5 @@ router.post('/addNewProject', async (req, res) => {
     res.status(500).send(error.message)
   }
 })
-
-
 
 export { router as ProjectRouter }
