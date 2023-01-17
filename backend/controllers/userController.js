@@ -1,6 +1,7 @@
 import { User } from '../models/user.js';
 import { Op } from 'sequelize';
 import { Project } from '../models/project.js';
+import {ProjectMember} from '../models/projectMember.js';
 
 // INSERT INTO METHOD
 const insertUserIntoDatabase = async (req, res) => {
@@ -95,23 +96,24 @@ const deleteUser = async (req, res) => {
 };
 
 // GET PROJECTS BY USER ID
-const getProjectsByUserID = async (req, res, next) => {
+const getProjectsByUserID = async (req, res) => {
   try {
-    const userId = req.params.id;
-    const projects = await Project.findAll({
-      where: { userId },
-      include: [
-        {
-          model: Project,
-          as: 'project',
-        },
-      ],
-    });
-    if (projects.length === 0)
-      res.status(404).json({ message: 'No projects found.' });
-    else res.status(200).json({ data: projects });
-  } catch (error) {
-    next(error);
+      const { userId } = req.params;
+      const projects = await Project.findAll({
+          include: [
+              {
+                  model: ProjectMember,
+                  where: {
+                      userId: userId,
+                      memberType: 'PM'
+                  }
+              }
+          ]
+      });
+      res.send(projects);
+  } catch (err) {
+      console.log(err);
+      res.status(500).send({ message: 'Error getting projects for user' });
   }
 };
 
