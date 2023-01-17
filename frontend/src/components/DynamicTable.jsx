@@ -42,7 +42,7 @@ export default function DynamicTable() {
         </TableHead>
         <TableBody>
           {data.map((row) => (
-            <TableRow key={row.id} onClick={() => setSelectedIndex(row.projectId)}>
+            <TableRow key={row.projectId} onClick={() => {setSelectedIndexes(row.projectId);console.log(setSelectedIndexes(row.projectId))}}>
               <TableCell component="th" scope="row">
                 {row.projectId}
               </TableCell>

@@ -18,41 +18,26 @@ const style = {
   boxShadow: 24,
   p: 4,
 }
-let usrId = localStorage.getItem('userId');
+let currentProjectId = JSON.parse(localStorage.getItem('selectedProjectId'));
 
-function AddProjectsScreen() {
+
+function AddBugScreen() {
   const navigate = useNavigate()
-  const [projectName, setProjectName] = useState('')
-  const [projectDescription, setProjectDescription] = useState('')
-  const [projectRepository, setProjectRepository] = useState('')
+  const [bugSeverity, setBugSeverity] = useState('')
+  const [bugDescription, setBugDescription] = useState('')
+  const [bugLink, setBugLink] = useState('')
   const handleSubmit = (e) => {
     e.preventDefault()
     axios
-      .post('http://localhost:5001/api/newProject', {
-        name: projectName,
-        description: projectDescription,
-        repository: projectRepository,
-      })
-      .then((response) => {
-        if (response.data.data.projectId) {
-        localStorage.setItem('projectId', response.data.data.projectId)
-      }
-      else {
-        alert('Incorrect username or password')
-      }
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-
-    axios
-      .post('http://localhost:5001/api/newPM', {
-        projectId:localStorage.getItem('projectId'),
-        userId: usrId,
-        memberType: 'PM'
-      })
+    .post('http://localhost:5001/api/newBug', {
+      severity:bugSeverity,
+      description:bugDescription,
+      link:bugLink,
+      status:"UNRESOLVED",
+      ProjectProjectId: currentProjectId
+    })
       .then(() => {
-        navigate('/home')
+        navigate("/Testing_Projects")
       })
       .catch((error) => {
         console.log(error)
@@ -70,29 +55,29 @@ function AddProjectsScreen() {
           sx={{ mt: 2 }}
           onSubmit={handleSubmit}
         >
-          <Typography sx={{ mt: 2 }}>Name of the project:</Typography>
+          <Typography sx={{ mt: 2 }}>Bug Severity:</Typography>
           <Input
             placeholder="name"
             required
             sx={{ mb: 1, fontSize: 'var(--joy-fontSize-sm)' }}
-            value={projectName}
-            onChange={(e) => setProjectName(e.target.value)}
+            value={bugSeverity}
+            onChange={(e) => setBugSeverity(e.target.value)}
           />
-          <Typography sx={{ mt: 2 }}>Description:</Typography>
+          <Typography sx={{ mt: 2 }}>Bug Description:</Typography>
           <Input
             placeholder="zi ba ce face"
             required
             sx={{ mb: 1, fontSize: 'var(--joy-fontSize-sm)' }}
-            value={projectDescription}
-            onChange={(e) => setProjectDescription(e.target.value)}
+            value={bugDescription}
+            onChange={(e) => setBugDescription(e.target.value)}
           />
-          <Typography sx={{ mt: 2 }}>Repository:</Typography>
+          <Typography sx={{ mt: 2 }}>Link to commit:</Typography>
           <Input
             placeholder="da linku"
             required
             sx={{ mb: 1, fontSize: 'var(--joy-fontSize-sm)' }}
-            value={projectRepository}
-            onChange={(e) => setProjectRepository(e.target.value)}
+            value={bugLink}
+            onChange={(e) => setBugLink(e.target.value)}
           />
           <Button type="submit">Submit</Button>
         </form>
@@ -100,4 +85,4 @@ function AddProjectsScreen() {
     </div>
   )
 }
-export default AddProjectsScreen
+export default AddBugScreen
