@@ -26,23 +26,30 @@ function AddBugScreen() {
   const [bugSeverity, setBugSeverity] = useState('')
   const [bugDescription, setBugDescription] = useState('')
   const [bugLink, setBugLink] = useState('')
+  
   const handleSubmit = (e) => {
     e.preventDefault()
-    axios
-    .post('http://localhost:5001/api/newBug', {
-      severity:bugSeverity,
-      description:bugDescription,
-      link:bugLink,
-      status:"UNRESOLVED",
-      ProjectProjectId: currentProjectId
-    })
-      .then(() => {
-        navigate("/Testing_Projects")
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }
+    try {
+        let currentProjectId = JSON.parse(localStorage.getItem('selectedProjectId'));
+        axios
+            .post('http://localhost:5001/api/newBug', {
+                severity: bugSeverity,
+                description: bugDescription,
+                link: bugLink,
+                status: "UNRESOLVED",
+                ProjectProjectId: currentProjectId
+            })
+            .then(() => {
+                navigate("/Testing_Projects")
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    } catch (error) {
+        console.error('Error while retrieving selectedProjectId from localStorage:', error)
+    }
+}
+
   return (
     <div>
       <Header />

@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 export default function DynamicTableBugs() {
   const [data, setData] = useState([]);
   const navigate=useNavigate()
+
   const handleClick = (id) => {
     localStorage.setItem("selectedProjectId", JSON.stringify(id));
     navigate('/addBug');
@@ -50,7 +51,7 @@ export default function DynamicTableBugs() {
               </TableCell>
               <TableCell align="right">{row.name}</TableCell>
               <TableCell align="right">{row.description}</TableCell>
-              <TableCell align="right"><Button>Add a Bug</Button></TableCell>
+              <TableCell align="right"><Button onClick={() => handleClick(row.projectId)}>Add a Bug</Button></TableCell>
             </TableRow>
           ))}
         </TableBody>
