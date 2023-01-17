@@ -4,12 +4,8 @@ import Button from '@mui/material/Button'
 import Box from '@mui/joy/Box'
 import Typography from '@mui/material/Typography'
 import Input from '@mui/joy/Input'
-import { TextField } from '@mui/material'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import parse from 'autosuggest-highlight/parse'
-import match from 'autosuggest-highlight/match'
-import CircularProgress from '@mui/material/CircularProgress'
 
 const style = {
   position: 'absolute',
@@ -22,6 +18,7 @@ const style = {
   boxShadow: 24,
   p: 4,
 }
+let usrId = localStorage.getItem('userId');
 
 function AddProjectsScreen() {
   const navigate = useNavigate()
@@ -37,8 +34,25 @@ function AddProjectsScreen() {
         repository: projectRepository,
       })
       .then((response) => {
+        if (response.data.data.projectId) {
+        localStorage.setItem('projectId', response.data.data.projectId)
+      }
+      else {
+        alert('Incorrect username or password')
+      }
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+
+    axios
+      .post('http://localhost:5001/api/newPM', {
+        projectId:localStorage.getItem('projectId'),
+        userId: usrId,
+        memberType: 'PM'
+      })
+      .then(() => {
         navigate('/home')
-        localStorage.setItem('projectId', response.data.data.id)
       })
       .catch((error) => {
         console.log(error)

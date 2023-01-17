@@ -6,13 +6,19 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import Button from "@mui/joy/Button";
-import BasicModal from "./BasicModal";
+import Button from "@mui/material/Button";
 
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function DynamicTableBugs() {
   const [data, setData] = useState([]);
+  const navigate=useNavigate()
+
+  const handleClick = (id) => {
+    localStorage.setItem("selectedProjectId", JSON.stringify(id));
+    navigate('/addBug');
+  };
 
   useEffect(() => {
     axios
@@ -39,13 +45,13 @@ export default function DynamicTableBugs() {
         </TableHead>
         <TableBody>
           {data.map((row) => (
-            <TableRow key={row.id}>
+            <TableRow key={row.projectId}>
               <TableCell component="th" scope="row">
                 {row.projectId}
               </TableCell>
               <TableCell align="right">{row.name}</TableCell>
               <TableCell align="right">{row.description}</TableCell>
-              <TableCell align="right"><BasicModal>Add a Bug</BasicModal></TableCell>
+              <TableCell align="right"><Button onClick={() => handleClick(row.projectId)}>Add a Bug</Button></TableCell>
             </TableRow>
           ))}
         </TableBody>

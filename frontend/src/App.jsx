@@ -7,6 +7,7 @@ import MyProjectsScreen from './screens/MyProjectsScreen';
 import SignUpScreen from './screens/SignUpScreen';
 import AddProjectScreen from './screens/AddProjectScreen';
 import TesterProjects from './screens/TesterProjects';
+import AddBugScreen from './screens/AddBugScreen';
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
         <Route path="/Testing_Projects" element={<TesterProjects />} /> 
         <Route path="/My_Projects" element={<MyProjectsScreen />} />
         <Route path="/addProject" element={<AddProjectScreen/>} />
+        <Route path="/addBug" element={<AddBugScreen/>} />
+
       </Routes>
     </BrowserRouter>
   );
