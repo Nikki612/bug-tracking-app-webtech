@@ -31,13 +31,15 @@ function AddBugScreen() {
     e.preventDefault()
     try {
         let currentProjectId = JSON.parse(localStorage.getItem('selectedProjectId'));
+        console.log(currentProjectId);
+        console.log(typeof(currentProjectId));
         axios
             .post('http://localhost:5001/api/newBug', {
                 severity: bugSeverity,
                 description: bugDescription,
                 link: bugLink,
                 status: "UNRESOLVED",
-                ProjectProjectId: currentProjectId
+                projectId: currentProjectId
             })
             .then(() => {
                 navigate("/Testing_Projects")

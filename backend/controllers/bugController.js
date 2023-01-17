@@ -9,7 +9,8 @@ const insertBugIntoDatabase=async (req,res)=>{
                 severity: req.body.severity,
                 description: req.body.description,
                 link: req.body.link,
-                status: req.body.status
+                status: req.body.status,
+                projectId:req.body.projectId
             });
             res.status(201).json({data: bug});
         } catch(err) {

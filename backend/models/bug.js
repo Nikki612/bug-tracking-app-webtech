@@ -31,6 +31,11 @@ const Bug=sequelize.define(
         {
             type:DataTypes.STRING,
             allowNull: false
+        },
+        projectId:
+        {
+            type:DataTypes.INTEGER,
+            allowNull: false
         }
     }
 )
