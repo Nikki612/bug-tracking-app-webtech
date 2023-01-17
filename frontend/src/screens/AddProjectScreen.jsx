@@ -5,7 +5,17 @@ import Box from '@mui/joy/Box'
 import Typography from '@mui/material/Typography'
 import Input from '@mui/joy/Input'
 import axios from 'axios'
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableContainer from '@mui/material/TableContainer'
+import TableHead from '@mui/material/TableHead'
+import TableRow from '@mui/material/TableRow'
+import Paper from '@mui/material/Paper'
+import ToggleButton from '@mui/material/ToggleButton'
+import CheckIcon from '@mui/icons-material/Check'
 import { useNavigate } from 'react-router-dom'
+
 
 const style = {
   position: 'absolute',
@@ -25,6 +35,24 @@ function AddProjectsScreen() {
   const [projectName, setProjectName] = useState('')
   const [projectDescription, setProjectDescription] = useState('')
   const [projectRepository, setProjectRepository] = useState('')
+
+  const [data, setData] = useState([])
+  const [userData, setUserData] = useState('')
+  const [selected, setSelected] = useState(false)
+  const [selectedIndexes, setSelectedIndexes] = useState([])
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:5001/api/users')
+      .then((res) => {
+        setData(res.data)
+        console.log('Result:', data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }, [])
+
   const handleSubmit = (e) => {
     e.preventDefault()
     axios
@@ -94,6 +122,42 @@ function AddProjectsScreen() {
             value={projectRepository}
             onChange={(e) => setProjectRepository(e.target.value)}
           />
+          <TableContainer component={Paper}>
+          <Table aria-label="simple table" stickyHeader>
+            <TableHead>
+              <TableRow>
+                <TableCell>Email</TableCell>
+                <TableCell align="right">Add?</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {data.map((row) => (
+                <TableRow key={row.email}>
+                  <TableCell component="th" scope="row">
+                    {row.email}
+                  </TableCell>
+                  <TableCell align="right">
+                    <ToggleButton
+                      value="checked"
+                      selected={selectedIndexes.includes(row.email)}
+                      onChange={() => {
+                        if (selectedIndexes.includes(row.email)) {
+                          setSelectedIndexes(
+                            selectedIndexes.filter((email) => email !== row.email)
+                          )
+                        } else {
+                          setSelectedIndexes([...selectedIndexes, row.email])
+                        }
+                      }}
+                    >
+                      <CheckIcon />
+                    </ToggleButton>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+    </TableContainer>
           <Button type="submit">Submit</Button>
         </form>
       </Box>

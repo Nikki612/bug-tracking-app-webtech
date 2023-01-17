@@ -43,25 +43,24 @@ export default function DynamicTable() {
         </TableHead>
         <TableBody>
           {data.map((row) => (
-            <TableRow key={row.projectId} onClick={() => {setSelectedIndexes(row.projectId);console.log(setSelectedIndexes(row.projectId))}}>
+            <TableRow key={row.id}>
               <TableCell component="th" scope="row">
-                {row.projectId}
+                {row.id}
               </TableCell>
               <TableCell align="right">{row.name}</TableCell>
               <TableCell align="right">{row.description}</TableCell>
               <TableCell align="right">{row.repository}</TableCell>
               <TableCell align="right">
                 <ToggleButton
-                  key={row.projectId}
-                  value="check"
-                  selected={selectedIndexes.includes(row.projectId)}
+                  value={row.id}
+                  selected={selectedIndexes.includes(row.id)}
                   onChange={() => {
-                    if (selectedIndexes.includes(row.projectId)) {
+                    if (selectedIndexes.includes(row.id)) {
                       setSelectedIndexes(
-                        selectedIndexes.filter((id) => id !== row.projectId)
+                        selectedIndexes.filter((id) => id !== row.id)
                       )
                     } else {
-                      setSelectedIndexes([...selectedIndexes, row.projectId])
+                      setSelectedIndexes([...selectedIndexes, row.id])
                     }
                   }}
                 >

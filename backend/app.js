@@ -39,4 +39,7 @@ Project.belongsToMany(User, { through: ProjectMember })
 Bug.belongsTo(Project)
 Project.hasMany(Bug)
 
-await sequelize.sync()
+// sequelize.query("DROP TABLE ProjectMembers_backup").then(() => {
+//   console.log("ProjectMembers table dropped successfully");
+// });
+//await sequelize.sync()
