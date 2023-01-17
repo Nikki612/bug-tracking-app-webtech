@@ -1,33 +1,34 @@
-import React, { useEffect, useState } from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import ToggleButton from '@mui/material/ToggleButton';
-import CheckIcon from '@mui/icons-material/Check';
+import React, { useEffect, useState } from 'react'
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableContainer from '@mui/material/TableContainer'
+import TableHead from '@mui/material/TableHead'
+import TableRow from '@mui/material/TableRow'
+import Paper from '@mui/material/Paper'
+import ToggleButton from '@mui/material/ToggleButton'
+import CheckIcon from '@mui/icons-material/Check'
 
-import axios from "axios";
+import axios from 'axios'
 
 export default function DynamicTable() {
-  const [data, setData] = useState([]);
-  const [selected, setSelected] = useState(false);
-  const [selectedIndexes, setSelectedIndexes] = useState([]);
+  const [data, setData] = useState([])
+  const [userData, setUserData] = useState('')
+  const [selected, setSelected] = useState(false)
+  const [selectedIndexes, setSelectedIndexes] = useState([])
 
   useEffect(() => {
     axios
-      .get("http://localhost:5001/api/projects")
+      .get('http://localhost:5001/api/projects')
       .then((res) => {
-        setData(res.data);
-        console.log("Result:", data);
+        setData(res.data)
+        console.log('Result:', data)
       })
       .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-
+        console.log(error)
+      })
+  }, [])
+  console.log(data)
   return (
     <TableContainer component={Paper}>
       <Table aria-label="simple table" stickyHeader>
@@ -42,7 +43,14 @@ export default function DynamicTable() {
         </TableHead>
         <TableBody>
           {data.map((row) => (
+<<<<<<< Updated upstream
             <TableRow key={row.projectId} onClick={() => {setSelectedIndexes(row.projectId);console.log(setSelectedIndexes(row.projectId))}}>
+=======
+            <TableRow
+              key={row.id}
+              onClick={() => setSelectedIndex(row.projectId)}
+            >
+>>>>>>> Stashed changes
               <TableCell component="th" scope="row">
                 {row.projectId}
               </TableCell>
@@ -56,11 +64,13 @@ export default function DynamicTable() {
                   selected={selectedIndexes.includes(row.projectId)}
                   onChange={() => {
                     if (selectedIndexes.includes(row.projectId)) {
-                    setSelectedIndexes(selectedIndexes.filter(id => id !== row.projectId));
-                } else {
-                    setSelectedIndexes([...selectedIndexes, row.projectId]);
-                }
-                 }}
+                      setSelectedIndexes(
+                        selectedIndexes.filter((id) => id !== row.projectId)
+                      )
+                    } else {
+                      setSelectedIndexes([...selectedIndexes, row.projectId])
+                    }
+                  }}
                 >
                   <CheckIcon />
                 </ToggleButton>
@@ -70,5 +80,5 @@ export default function DynamicTable() {
         </TableBody>
       </Table>
     </TableContainer>
-  );
+  )
 }

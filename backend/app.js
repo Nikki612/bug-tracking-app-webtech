@@ -35,7 +35,8 @@ console.log('API is running at port: ', port)
 
 User.belongsToMany(Project, { through: ProjectMember })
 Project.belongsToMany(User, { through: ProjectMember })
-// Bug.belongsTo(Project)
-// Project.hasMany(Bug)
+
+Bug.belongsTo(Project)
+Project.hasMany(Bug)
 
 await sequelize.sync({ force: true })
