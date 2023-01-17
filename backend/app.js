@@ -39,4 +39,4 @@ Project.belongsToMany(User, { through: ProjectMember })
 Bug.belongsTo(Project)
 Project.hasMany(Bug)
 
-await sequelize.sync({ force: true })
+await sequelize.sync()

@@ -21,13 +21,8 @@ function LoginScreen() {
       })
       .then((response) => {
         if (response.data.data.id) {
-<<<<<<< Updated upstream
           navigate('/home')
           localStorage.setItem('userId', response.data.data.id)
-=======
-          const userId = response.data.data
-          navigate(`/My_Projects/${userId}`, { state: { userId } })
->>>>>>> Stashed changes
         } else {
           alert('Incorrect username or password')
         }

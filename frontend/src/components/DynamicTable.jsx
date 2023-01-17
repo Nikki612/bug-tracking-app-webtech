@@ -43,14 +43,7 @@ export default function DynamicTable() {
         </TableHead>
         <TableBody>
           {data.map((row) => (
-<<<<<<< Updated upstream
             <TableRow key={row.projectId} onClick={() => {setSelectedIndexes(row.projectId);console.log(setSelectedIndexes(row.projectId))}}>
-=======
-            <TableRow
-              key={row.id}
-              onClick={() => setSelectedIndex(row.projectId)}
-            >
->>>>>>> Stashed changes
               <TableCell component="th" scope="row">
                 {row.projectId}
               </TableCell>
