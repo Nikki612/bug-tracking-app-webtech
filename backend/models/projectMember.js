@@ -1,28 +1,24 @@
-import { DataTypes} from "sequelize";
-import {sequelize} from "../sequelize.js";
+import { DataTypes } from 'sequelize'
+import { sequelize } from '../sequelize.js'
 
-const ProjectMember=sequelize.define(
-    "ProjectMember",
-    {
-        projectId:
-        {
-            type:DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: false,
-            allowNull: false,
-        },
-        userId:
-        {
-            type:DataTypes.STRING,
-            primaryKey: true,
-            allowNull: false,
-        },
-        memberType:
-        {
-            type:DataTypes.STRING,
-            allowNull: false
-        }
-    }
-)
+const ProjectMember = sequelize.define('ProjectMember', {
+  userId: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: 'Users',
+      key: 'id',
+    },
+  },
+  projectId: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: 'Projects',
+      key: 'id',
+    },
+  },
+  memberType: {
+    type: DataTypes.STRING,
+  },
+})
 
-export {ProjectMember};
+export { ProjectMember }
