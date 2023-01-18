@@ -1,13 +1,14 @@
 //TODO: ProjectSpecsPage
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import Header from '../components/Header'
 import { Typography } from '@mui/material'
 import CollapsibleTable from '../components/CollapsibleTable'
 import { useLocation } from 'react-router-dom'
+import axios from 'axios'
 
 function MyProjectsScreen() {
   const location = useLocation()
-  const { userId } = location.state
+  const { userId } = localStorage.getItem('userId')
   const [user, setUser] = useState({})
 
   useEffect(() => {

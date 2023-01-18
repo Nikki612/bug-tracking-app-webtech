@@ -10,6 +10,7 @@ import { ProjectMember } from './models/projectmember.js'
 import { BugRouter } from './routers/bugRouter.js'
 import { ProjectRouter } from './routers/projectRouter.js'
 import { ProjectMemberRouter } from './routers/projectMemberRouter.js'
+import axios from 'axios'
 
 const port = 5001
 const app = express()
@@ -42,4 +43,4 @@ Project.belongsToMany(User, { through: ProjectMember })
 // sequelize.query("DROP TABLE Users_backup").then(() => {
 //   console.log("ProjectMembers table dropped successfully");
 // });
-await sequelize.sync()
+// await sequelize.sync();

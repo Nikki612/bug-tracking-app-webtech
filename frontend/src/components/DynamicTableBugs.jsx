@@ -45,13 +45,13 @@ export default function DynamicTableBugs() {
         </TableHead>
         <TableBody>
           {data.map((row) => (
-            <TableRow key={row.projectId}>
+            <TableRow key={row.id}>
               <TableCell component="th" scope="row">
-                {row.projectId}
+                {row.id}
               </TableCell>
               <TableCell align="right">{row.name}</TableCell>
               <TableCell align="right">{row.description}</TableCell>
-              <TableCell align="right"><Button onClick={() => handleClick(row.projectId)}>Add a Bug</Button></TableCell>
+              <TableCell align="right"><Button onClick={() => handleClick(row.id)}>Add a Bug</Button></TableCell>
             </TableRow>
           ))}
         </TableBody>
