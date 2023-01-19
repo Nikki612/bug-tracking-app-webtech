@@ -56,10 +56,35 @@ export default function DynamicTable() {
                   selected={selectedIndexes.includes(row.id)}
                   onChange={() => {
                     if (selectedIndexes.includes(row.id)) {
+                      // Make a DELETE API call to delete the PM
+                      axios.delete(`http://localhost:5001/api/pms/${row.id}`, {
+                        params: {
+                          userId: localStorage.getItem("userId"),
+                          memberType: "tst"
+                        }
+                      })
+                        .then(response => {
+                          console.log(response);
+                        })
+                        .catch(error => {
+                          console.log(error);
+                        });
                       setSelectedIndexes(
                         selectedIndexes.filter((id) => id !== row.id)
                       )
                     } else {
+                      // Make a POST API call to insert the PM
+                      axios.post(`http://localhost:5001/api/newPM`, {
+                        projectId: row.id,
+                        userId: localStorage.getItem("userId"),
+                        memberType: "tst"
+                      })
+                        .then(response => {
+                          console.log(response);
+                        })
+                        .catch(error => {
+                          console.log(error);
+                        });
                       setSelectedIndexes([...selectedIndexes, row.id])
                     }
                   }}

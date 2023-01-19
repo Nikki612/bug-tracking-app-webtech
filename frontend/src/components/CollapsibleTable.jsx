@@ -15,15 +15,15 @@ function CollapsibleTable() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5001/api/${userId}/projects`)
-      .then((res) => {
-        setProjects(res.data);
-        console.log("Projects:", projects);
-      })
+    .get(`http://localhost:5001/api/projects/${userId}`)
+    .then((res) => {
+      setProjects(res.data.data);
+      console.log("Projects:", projects);
+    })
       .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+        console.log(error)
+      })
+  }, [])
 
   return (
     <TableContainer component={Paper}>

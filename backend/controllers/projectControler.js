@@ -1,4 +1,5 @@
 import { Project } from '../models/project.js'
+import { ProjectMember } from '../models/projectMember.js'
 import { Op } from 'sequelize'
 
 //INSERT INTO METHOD
@@ -73,10 +74,46 @@ const deleteProject = async (req, res) => {
   }
 }
 
+const getProjectsByUserId = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const projects = await Project.findAll({
+      include: [
+        {
+          model: ProjectMember,
+          where: { userId: userId, memberType: "pm" }
+        }
+      ]
+    });
+    res.status(200).json({ data: projects });
+  } catch (err) {
+    res.status(500).json({ message: "Error getting projects by user ID", error: err });
+  }
+};
+
+const getProjectsByUserIdTST = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const projects = await Project.findAll({
+      include: [
+        {
+          model: ProjectMember,
+          where: { userId: userId, memberType: "tst" }
+        }
+      ]
+    });
+    res.status(200).json({ data: projects });
+  } catch (err) {
+    res.status(500).json({ message: "Error getting projects by user ID", error: err });
+  }
+};
+
 export {
   insertProjectIntoDatabase,
   getAllProjectsFromDB,
   getProjectFromDBById,
   updateProjectFromDBById,
   deleteProject,
+  getProjectsByUserId,
+  getProjectsByUserIdTST
 }

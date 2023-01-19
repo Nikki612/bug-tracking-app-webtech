@@ -1,5 +1,6 @@
 import { ProjectMember } from "../models/projectMember.js";
 import {Op} from "sequelize"
+import {Project}    from "../models/project.js"
 
 // INSERT INTO METHOD
 const insertPMIntoDatabase=async (req,res)=>{
@@ -67,19 +68,25 @@ const updatePMFromDBById = async (req, res)=>{
 // DELETE
 const deletePM = async (req, res) => {
     try {
-      const projectMember = await projectMember.findByPk(req.params.id);
-      if (projectMember) {
-        await projectMember.destroy();
-        return res.status(200).json("Entity deleted successfully!");
-      } else {
-        return res
-          .status(404)
-          .json({ error: `Project Member with id ${req.params.id} not found` });
-      }
+        const userId = localStorage.getItem("userId");
+        const projectId = req.params.projectId;
+        const memberType = "tst";
+        const deletedPm = await ProjectMember.destroy({
+            where: {
+                userId: userId,
+                projectId: projectId,
+                memberType: memberType
+            }
+        });
+        if (deletedPm) {
+            return res.status(200).json({ message: "Project Member deleted successfully!" });
+        } else {
+            return res.status(404).json({ error: "Project Member not found" });
+        }
     } catch (err) {
-      res.status(500).json(err);
+        res.status(500).json({ message: "Error deleting Project Member", error: err });
     }
-  };
+}
 
   const addProjectMembers = async (req, res) => {
     try {
@@ -100,6 +107,24 @@ const deletePM = async (req, res) => {
     }
 }
 
+const getProjectsByUserId = async (req, res) => {
+    try {
+      const userId = req.params.id;
+      const projects = await ProjectMember.findAll({
+        where: {
+            userId: userId,
+            memberType: 'pm'
+        },
+        include: [{
+            model: Project
+        }]
+    });
+      res.status(200).json({ data: projects });
+    } catch (err) {
+      res.status(500).json({ message: "Error getting projects by user ID", error: err });
+    }
+  };
+
 export
 {
     insertPMIntoDatabase,
@@ -107,5 +132,6 @@ export
     getPMFromDBById,
     updatePMFromDBById,
     deletePM,
-    addProjectMembers
+    addProjectMembers,
+    getProjectsByUserId
 }

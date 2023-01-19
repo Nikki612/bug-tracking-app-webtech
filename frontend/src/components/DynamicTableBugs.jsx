@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 export default function DynamicTableBugs() {
   const [data, setData] = useState([]);
   const navigate=useNavigate()
-
+  let userId=localStorage.getItem("userId");
   const handleClick = (id) => {
     localStorage.setItem("selectedProjectId", JSON.stringify(id));
     navigate('/addBug');
@@ -22,9 +22,9 @@ export default function DynamicTableBugs() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5001/api/projects")
+      .get(`http://localhost:5001/api/projects/${userId}/tst`)
       .then((res) => {
-        setData(res.data);
+        setData(res.data.data);
         console.log("Result:", data);
       })
       .catch((error) => {

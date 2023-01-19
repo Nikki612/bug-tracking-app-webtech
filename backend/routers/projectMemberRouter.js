@@ -3,6 +3,7 @@ import * as PMController from "../controllers/projectMemberController.js";
 
 const router=express.Router();
 
+router.get('/:userId/projectsPM', PMController.getProjectsByUserId);
 router.post("/newPM", PMController.insertPMIntoDatabase); // insert
 router.get("/pms", PMController.getAllPMFromDB);  // get all
 router.get("/pms/:pmId", PMController.getPMFromDBById); // get by id
