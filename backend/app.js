@@ -10,7 +10,6 @@ import { ProjectMember } from './models/projectmember.js'
 import { BugRouter } from './routers/bugRouter.js'
 import { ProjectRouter } from './routers/projectRouter.js'
 import { ProjectMemberRouter } from './routers/projectMemberRouter.js'
-import axios from 'axios'
 
 const port = 5001
 const app = express()
@@ -34,13 +33,22 @@ console.log('API is running at port: ', port)
 
 //TODO: TABLE RELATIONSHIPS
 
-User.belongsToMany(Project, { through: ProjectMember })
-Project.belongsToMany(User, { through: ProjectMember })
+// User.belongsToMany(Project, {
+//   through: ProjectMember,
+//   foreignKey: 'userId',
+//   otherKey: 'projectId',
+// });
 
-// Bug.belongsTo(Project)
-// Project.hasMany(Bug)
+// Project.belongsToMany(User, {
+//   through: ProjectMember,
+//   foreignKey: 'projectId',
+//   otherKey: 'userId',
+// });
+
+Bug.belongsTo(Project)
+Project.hasMany(Bug)
 
 // sequelize.query("DROP TABLE Users_backup").then(() => {
 //   console.log("ProjectMembers table dropped successfully");
 // });
-// await sequelize.sync();
+//await sequelize.sync();

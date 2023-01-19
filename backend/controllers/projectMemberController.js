@@ -81,11 +81,31 @@ const deletePM = async (req, res) => {
     }
   };
 
+  const addProjectMembers = async (req, res) => {
+    try {
+        const projectId = req.body.projectId
+        const selectedMembers = req.body.members
+        const newPms = []
+        for (const member of selectedMembers) {
+            const newPm = await ProjectMember.create({
+                projectId: projectId,
+                userId: member.id,
+                memberType: 'pm'
+            })
+            newPms.push(newPm)
+        }
+        res.status(201).json({ data: newPms })
+    } catch (err) {
+        res.status(500).json({ message: 'Error adding members to project', error: err })
+    }
+}
+
 export
 {
     insertPMIntoDatabase,
     getAllPMFromDB,
     getPMFromDBById,
     updatePMFromDBById,
-    deletePM
+    deletePM,
+    addProjectMembers
 }

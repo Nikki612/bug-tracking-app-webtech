@@ -9,7 +9,7 @@ const insertProjectIntoDatabase = async (req, res) => {
       description: req.body.description,
       repository: req.body.repository,
     })
-    res.status(201).json({ data: project })
+    res.status(201).json({ data: project, id: project.id })
   } catch (err) {
     res.status(500).json(err)
   }

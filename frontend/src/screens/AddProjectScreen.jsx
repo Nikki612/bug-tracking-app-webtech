@@ -27,7 +27,7 @@ const style = {
   boxShadow: 24,
   p: 4,
 }
-let usrId = localStorage.getItem('userId')
+//let usrId = localStorage.getItem('userId')
 
 function AddProjectsScreen() {
   const navigate = useNavigate()
@@ -35,50 +35,22 @@ function AddProjectsScreen() {
   const [projectDescription, setProjectDescription] = useState('')
   const [projectRepository, setProjectRepository] = useState('')
 
-  const [data, setData] = useState([])
-  const [userData, setUserData] = useState('')
-  const [selected, setSelected] = useState(false)
-  const [selectedIndexes, setSelectedIndexes] = useState([])
-
-  useEffect(() => {
-    axios
-      .get('http://localhost:5001/api/users')
-      .then((res) => {
-        if (res.status === 200 && res.data) {
-          if (Array.isArray(res.data)) {
-            setData(res.data)
-          } else {
-            console.log('API did not return an array')
-          }
-        } else {
-          console.log('Could not retrieve data from the API')
-        }
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }, [])
-
   const handleSubmit = async (e) => {
     e.preventDefault()
-    try {
-      const project = await axios.post(
-        'http://localhost:5001/api/addNewProject',
-        {
-          name: projectName,
-          description: projectDescription,
-          repository: projectRepository,
-          users: selectedIndexes.map((i) => data[i]),
-        }
-      )
-      if (project.status === 200 && project.data) {
-        navigate('/home')
-      } else {
-        console.log('Could not create project, please check the data')
-      }
-    } catch (error) {
-      console.error(error)
-    }
+    axios.post('http://localhost:5001/api/newProject', {
+    name: projectName,
+    description: projectDescription,
+    repository: projectRepository
+}).then((response) => {
+  if (response.status === 200 || response.status === 201) {
+     navigate('/addMembers')
+     localStorage.setItem('projectId', response.data.id)
+  } else {
+     console.log("error creating project")
+  }
+}).catch((error) => {
+   console.log(error)
+});
   }
   return (
     <div>
@@ -116,42 +88,6 @@ function AddProjectsScreen() {
             value={projectRepository}
             onChange={(e) => setProjectRepository(e.target.value)}
           />
-          <TableContainer component={Paper}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Name</TableCell>
-                  <TableCell>Email</TableCell>
-                  <TableCell>Select</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {data.map((user, index) => (
-                  <TableRow key={index}>
-                    <TableCell>{user.name}</TableCell>
-                    <TableCell>{user.email}</TableCell>
-                    <TableCell>
-                      <ToggleButton
-                        value={index}
-                        selected={selectedIndexes.includes(index)}
-                        onChange={() => {
-                          if (selectedIndexes.includes(index)) {
-                            setSelectedIndexes(
-                              selectedIndexes.filter((i) => i !== index)
-                            )
-                          } else {
-                            setSelectedIndexes([...selectedIndexes, index])
-                          }
-                        }}
-                      >
-                        <CheckIcon />
-                      </ToggleButton>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
           <Button type="submit" variant="contained" color="primary">
             Create Project
           </Button>
