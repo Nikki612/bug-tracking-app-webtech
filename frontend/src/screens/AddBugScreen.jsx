@@ -57,7 +57,7 @@ function AddBugScreen() {
       <Header />
       <Box sx={style}>
         <Typography id="modal-modal-title" variant="h6" component="h2">
-          Add a Project
+          Add a Bug
         </Typography>
         <form
           id="modal-modal-description"
