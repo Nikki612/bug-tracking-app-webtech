@@ -74,7 +74,7 @@ function AddProjectsScreen() {
           />
           <Typography sx={{ mt: 2 }}>Description:</Typography>
           <Input
-            placeholder="zi ba ce face"
+            placeholder="project description"
             required
             sx={{ mb: 1, fontSize: 'var(--joy-fontSize-sm)' }}
             value={projectDescription}
@@ -82,7 +82,7 @@ function AddProjectsScreen() {
           />
           <Typography sx={{ mt: 2 }}>Repository:</Typography>
           <Input
-            placeholder="repo"
+            placeholder="repo link"
             required
             sx={{ mb: 1, fontSize: 'var(--joy-fontSize-sm)' }}
             value={projectRepository}

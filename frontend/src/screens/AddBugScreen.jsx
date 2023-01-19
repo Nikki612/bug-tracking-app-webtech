@@ -66,7 +66,7 @@ function AddBugScreen() {
         >
           <Typography sx={{ mt: 2 }}>Bug Severity:</Typography>
           <Input
-            placeholder="name"
+            placeholder="severity of the bug"
             required
             sx={{ mb: 1, fontSize: 'var(--joy-fontSize-sm)' }}
             value={bugSeverity}
@@ -74,15 +74,15 @@ function AddBugScreen() {
           />
           <Typography sx={{ mt: 2 }}>Bug Description:</Typography>
           <Input
-            placeholder="zi ba ce face"
+            placeholder="description"
             required
             sx={{ mb: 1, fontSize: 'var(--joy-fontSize-sm)' }}
             value={bugDescription}
             onChange={(e) => setBugDescription(e.target.value)}
           />
-          <Typography sx={{ mt: 2 }}>Link to commit:</Typography>
+          <Typography sx={{ mt: 2 }}>Link to issue:</Typography>
           <Input
-            placeholder="da linku"
+            placeholder="Please provide a link to the issue!"
             required
             sx={{ mb: 1, fontSize: 'var(--joy-fontSize-sm)' }}
             value={bugLink}
