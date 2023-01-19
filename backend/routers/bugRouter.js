@@ -8,5 +8,6 @@ router.get("/bugs", BugController.getAllBugsFromDB);  // get all
 router.get("/bugs/:bugId", BugController.getBugFromDBById); // get by id
 router.put("/bugs/:bugId", BugController.updateBugFromDBById); // update by id
 router.delete("/bugs/:bugId", BugController.deleteBug); // delete
+router.get("/allBugs/:projectId", BugController.getBugsByProjId);
 
 export {router as BugRouter};

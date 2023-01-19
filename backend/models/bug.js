@@ -24,6 +24,10 @@ const Bug = sequelize.define('Bug', {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  projectId: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
 })
 
 export { Bug }

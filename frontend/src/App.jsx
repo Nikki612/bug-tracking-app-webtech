@@ -9,6 +9,7 @@ import AddProjectScreen from './screens/AddProjectScreen'
 import TesterProjects from './screens/TesterProjects'
 import AddBugScreen from './screens/AddBugScreen'
 import AddMembersToProject from './screens/AddMembersToProject'
+import BugListScreen from './screens/BugListScren'
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/addProject" element={<AddProjectScreen />} />
         <Route path="/addBug" element={<AddBugScreen />} />
         <Route path="/addMembers" element={<AddMembersToProject />} />
+        <Route path="/allBugs" element={<BugListScreen />} />
       </Routes>
     </BrowserRouter>
   )

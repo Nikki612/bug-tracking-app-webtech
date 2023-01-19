@@ -7,11 +7,14 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import Button from "@mui/material/Button";
 
 function CollapsibleTable() {
   const [projects, setProjects] = useState([]);
   const userId = localStorage.getItem("userId");
   const memberType = localStorage.getItem("memberType");
+  const navigate=useNavigate()
 
   useEffect(() => {
     axios
@@ -34,6 +37,7 @@ function CollapsibleTable() {
             <TableCell align="right">Name</TableCell>
             <TableCell align="right">Description</TableCell>
             <TableCell align="right">Repository</TableCell>
+            <TableCell align="right">See Bugs</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -45,6 +49,7 @@ function CollapsibleTable() {
               <TableCell align="right">{project.name}</TableCell>
               <TableCell align="right">{project.description}</TableCell>
               <TableCell align="right">{project.repository}</TableCell>
+              <TableCell align="right"><Button onClick={()=>{navigate('/allBugs');localStorage.setItem("selectedBugProjId", JSON.stringify(project.id));}}>See Bugs</Button></TableCell>
             </TableRow>
           ))}
         </TableBody>

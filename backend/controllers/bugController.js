@@ -5,7 +5,7 @@ import {Op} from "sequelize"
 const insertBugIntoDatabase=async (req,res)=>{
         try {
             const bug = await Bug.create({
-                bugId:req.body.bugId,
+                //bugId:req.body.bugId,
                 severity: req.body.severity,
                 description: req.body.description,
                 link: req.body.link,
@@ -83,11 +83,28 @@ const deleteBug = async (req, res) => {
     }
   };
 
+  const getBugsByProjId=async(req,res) => {
+    try {
+    const selectedBugProjId = req.params.projectId;
+    const bugs = await Bug.findAll({
+        where: 
+            {
+            projectId: selectedBugProjId
+            }
+        });
+        res.status(200).json({ data: bugs });
+        } catch (err) {
+        res.status(500).json({ message: "Error getting bugs by project ID", error: err });
+        }
+
+  };
+
 export
 {
     insertBugIntoDatabase,
     getAllBugsFromDB,
     getBugFromDBById,
     updateBugFromDBById,
-    deleteBug
+    deleteBug,
+    getBugsByProjId
 };

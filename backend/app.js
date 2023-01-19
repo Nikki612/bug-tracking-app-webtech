@@ -45,7 +45,7 @@ console.log('API is running at port: ', port)
 //   otherKey: 'userId',
 // });
 
-Bug.belongsTo(Project)
+Bug.belongsTo(Project,{foreignKey: 'projectId'})
 Project.hasMany(Bug)
 
 ProjectMember.belongsTo(Project, { foreignKey: 'projectId' });
