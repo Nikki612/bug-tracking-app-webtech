@@ -68,14 +68,12 @@ const updatePMFromDBById = async (req, res)=>{
 // DELETE
 const deletePM = async (req, res) => {
     try {
-        const userId = localStorage.getItem("userId");
-        const projectId = req.params.projectId;
-        const memberType = "tst";
+        const { projectId, memberType, userId } = req.body; // destructuring payload
         const deletedPm = await ProjectMember.destroy({
             where: {
-                userId: userId,
                 projectId: projectId,
-                memberType: memberType
+                memberType: memberType,
+                userId: userId
             }
         });
         if (deletedPm) {

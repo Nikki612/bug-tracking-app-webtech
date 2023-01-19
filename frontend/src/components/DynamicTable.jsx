@@ -17,6 +17,42 @@ export default function DynamicTable() {
   const [selected, setSelected] = useState(false)
   const [selectedIndexes, setSelectedIndexes] = useState([])
 
+  const onChange = async (rowId) => {
+  if(selectedIndexes.includes(rowId)) {
+    // Button is deselected, make DELETE request
+    try {
+      const userId = localStorage.getItem("userId");
+      const projectId = rowId;
+      const memberType = "tst";
+      await axios.delete('http://localhost:5001/api/pms/deletePMS', {
+          data: {
+              projectId: projectId,
+              memberType: memberType,
+              userId: userId
+          }
+      });
+      setSelectedIndexes(selectedIndexes.filter((id) => id !== row.id));
+  } catch (err) {
+      console.log(err);
+  }
+  } else {
+    // Button is selected, make POST request
+    try {
+      const userId = localStorage.getItem("userId");
+      const projectId = rowId;
+      const memberType = "tst";
+      const pm = await axios.post(`http://localhost:5001/api/newPM`, {
+        userId: userId,
+        projectId: projectId,
+        memberType: memberType
+      });
+      setSelectedIndexes([...selectedIndexes, rowId])
+    } catch (err) {
+      console.log("Error creating Project Member", err);
+    }
+  }
+}
+
   useEffect(() => {
     axios
       .get('http://localhost:5001/api/projects')
@@ -54,40 +90,7 @@ export default function DynamicTable() {
                 <ToggleButton
                   value={row.id}
                   selected={selectedIndexes.includes(row.id)}
-                  onChange={() => {
-                    if (selectedIndexes.includes(row.id)) {
-                      // Make a DELETE API call to delete the PM
-                      axios.delete(`http://localhost:5001/api/pms/${row.id}`, {
-                        params: {
-                          userId: localStorage.getItem("userId"),
-                          memberType: "tst"
-                        }
-                      })
-                        .then(response => {
-                          console.log(response);
-                        })
-                        .catch(error => {
-                          console.log(error);
-                        });
-                      setSelectedIndexes(
-                        selectedIndexes.filter((id) => id !== row.id)
-                      )
-                    } else {
-                      // Make a POST API call to insert the PM
-                      axios.post(`http://localhost:5001/api/newPM`, {
-                        projectId: row.id,
-                        userId: localStorage.getItem("userId"),
-                        memberType: "tst"
-                      })
-                        .then(response => {
-                          console.log(response);
-                        })
-                        .catch(error => {
-                          console.log(error);
-                        });
-                      setSelectedIndexes([...selectedIndexes, row.id])
-                    }
-                  }}
+                  onChange={() => onChange(row.id)}
                 >
                   <CheckIcon />
                 </ToggleButton>
